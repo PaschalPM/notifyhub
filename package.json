@@ -4,8 +4,12 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/index.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "pm2-start": "pm2 start npm --name 'my-app' -- run start",
+    "pm2-stop": "pm2 stop my-app",
+    "pm2-restart": "pm2 stop my-app",
+    "pm2-delete": "pm2 delete my-app"
   },
   "keywords": [],
   "author": "",

@@ -8,7 +8,7 @@ const app = express()
 const http = new httpServer(app)
 const io = new wsServer(http, {
     cors: {
-        origin: process.env.HOST_URL
+        origin: process.env.CORS_ALLOWED_ORIGIN
     }
 })
 

@@ -5,7 +5,7 @@
  * @returns 
  */
 function ensureSubjectId(req, res, next) {
-    const subjectId = req.body?.subjectId
+    const subjectId = req.body?.subject_id
 
     if (subjectId === undefined) {
         return res.status(400).json({
