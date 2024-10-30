@@ -1,1 +1,1 @@
-import "../socket-controllers/chats.controller.js"
+import "../controllers/ws/chats.controller.js"

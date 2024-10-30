@@ -16,9 +16,12 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "celebrate": "^15.0.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "firebase-admin": "^12.7.0",
+    "joi": "^17.13.3",
     "socket.io": "^4.8.0"
   },
   "devDependencies": {

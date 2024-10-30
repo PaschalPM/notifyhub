@@ -1,8 +1,6 @@
-import "./routes/index.route.js"
-import http from "./config/server.js";
+import appConfig from "./config/app.config.js";
+import http from "./config/http.config.js";
 
-const PORT = process.env.PORT ?? 3000
-
-http.listen(PORT, '0.0.0.0', function () {
-    console.log(`Server running on port ${PORT}`)
+http.listen(appConfig.port, '0.0.0.0', function () {
+    console.log(`Server running on port ${appConfig.port}`)
 })
