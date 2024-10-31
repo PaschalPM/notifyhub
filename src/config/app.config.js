@@ -1,23 +1,14 @@
-import dotenv from "dotenv"
-dotenv.config()
+import express from "express";
 
-const {
-    PORT,
-    ENV,
-    SERVICE_ACOUNT_PROJECT_ID,
-    SERVICE_ACCOUNT_PRIVATE_KEY,
-    SERVICE_ACOUNT_CLIENT_EMAIL,
-    CORS_ALLOWED_ORIGIN
-} = process.env
+import indexRouter from "../routes/index.js";
+import apiErrorMiddleware from "../middlewares/api-error-handler.middleware.js";
+import "./firebase-admin.config.js"
 
+// Set up express server
+const app = express()
 
-export default {
-    port: PORT ?? 5000,
-    env: ENV ?? "development",
-    corsAllowedOrigin: CORS_ALLOWED_ORIGIN,
-    serviceAccount: {
-        projectId: SERVICE_ACOUNT_PROJECT_ID,
-        privateKey: SERVICE_ACCOUNT_PRIVATE_KEY,
-        clientEmail: SERVICE_ACOUNT_CLIENT_EMAIL
-    }
-}
+app.use(express.json())
+app.use(indexRouter)
+app.use(apiErrorMiddleware)
+
+export default app

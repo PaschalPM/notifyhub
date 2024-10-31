@@ -1,7 +1,7 @@
 import { CelebrateError } from "celebrate";
 
 import { HttpException } from "../utils/http/exceptions.js";
-import appConfig from "../config/app.config.js";
+import appConfig from "../config/index.js";
 
 const apiErrorMiddleware = (err, _req, res, _next) => {
     console.error(err.message, err.stack)
