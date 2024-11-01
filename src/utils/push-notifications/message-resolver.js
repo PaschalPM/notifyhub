@@ -24,8 +24,8 @@ const getMessage = ({ data: { type, senderId, senderName }, recipientTokens }) =
             notification: {
                 title,
                 body,
-                data
             },
+            data,
             tokens: recipientTokens  // Array of recipient tokens for multiple devices
         }
     }

@@ -3,11 +3,12 @@ export class HttpException extends Error {
         super(message)
         this.statusCode = statusCode
         this.reason = reason
+       
     }
 }
 
 export class InternalServerError extends HttpException {
-    constructor(reason = "") {
-        super("Internal Server Error", 500, reason)
+    constructor( reason = "") {
+        super( "Internal Server Error", 500, reason)
     }
 }

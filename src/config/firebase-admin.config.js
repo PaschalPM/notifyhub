@@ -1,5 +1,5 @@
 import admin from "firebase-admin";
-import appConfig from "./index.js";
+import appConfig from "./app.config.js";
 
 // Initialize Firebase Admin SDK
 admin.initializeApp({

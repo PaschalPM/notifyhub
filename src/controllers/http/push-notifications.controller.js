@@ -1,3 +1,4 @@
+import apiResponse from "../../utils/http/api-response.js";
 import { InternalServerError } from "../../utils/http/exceptions.js";
 import messageResolver from "../../utils/push-notifications/message-resolver.js";
 import admin from "firebase-admin";
@@ -26,10 +27,8 @@ const sendNotification = async (req, res, next) => {
         message = messageResolver(notificationTypeToUpperCase, senderName, senderId, recipientTokens);
 
     } catch (e) {
-        return res.json({
-            status: "error",
-            errorMessage: e.message
-        });
+        const error = new InternalServerError(e.message)
+        next(error)
     }
 
     try {
@@ -41,17 +40,21 @@ const sendNotification = async (req, res, next) => {
         const failedTokens = [];
         response.responses.forEach((resp, idx) => {
             if (!resp.success) {
-                failedTokens.push(recipientTokens[idx]); // Collect failed tokens
+                console.error(resp.error)
+                failedTokens.push({ token: recipientTokens[idx], reason: resp.error.message }); // Collect failed tokens
             }
         });
 
+        return apiResponse(
+            res,
+            `${message.data.type} notification dispatched successfully`,
+            {
+                successCount: response.successCount,
+                failureCount: response.failureCount,
+                failedTokens: failedTokens
+            }
+        )
 
-        res.status(200).json({
-            message: `${message.notification.data.type} notification dispatched successfully`,
-            successCount: response.successCount,
-            failureCount: response.failureCount,
-            failedTokens: failedTokens
-        });
     } catch (error) {
         console.error('Error sending notification:', error);
         return next(new InternalServerError(error.message));

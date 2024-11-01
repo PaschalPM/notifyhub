@@ -1,7 +1,8 @@
 import { CelebrateError } from "celebrate";
 
 import { HttpException } from "../utils/http/exceptions.js";
-import appConfig from "../config/index.js";
+import appConfig from "../config/app.config.js";
+import apiResponse from "../utils/http/api-response.js";
 
 const apiErrorMiddleware = (err, _req, res, _next) => {
     console.error(err.message, err.stack)
@@ -27,13 +28,11 @@ const apiErrorMiddleware = (err, _req, res, _next) => {
         }
         if (err.reason) resBody.reason = err.reason
         if (appConfig.env !== 'production') resBody.errorStack = err.stack
-
-        return res.status(err.statusCode).json(resBody)
+        
+        return apiResponse(res, err.reason, { errorStack: err.stack }, err.statusCode)
     }
     else {
-        return res.status(500).json({
-            error: 'Internal Server Error'
-        });
+        return apiResponse(res, 'Internal Server Error', null, 500)
     }
 };
 

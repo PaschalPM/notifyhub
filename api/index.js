@@ -1,3 +1,3 @@
-import app from "../src/config/app.config.js";
+import app from "../src/app.js";
 
 export default app

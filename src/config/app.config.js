@@ -1,14 +1,31 @@
-import express from "express";
+import dotenv from "dotenv"
+dotenv.config()
 
-import indexRouter from "../routes/index.js";
-import apiErrorMiddleware from "../middlewares/api-error-handler.middleware.js";
-import "./firebase-admin.config.js"
+import { readFileSync } from "fs"
 
-// Set up express server
-const app = express()
+import { env } from "../constants/app.js"
 
-app.use(express.json())
-app.use(indexRouter)
-app.use(apiErrorMiddleware)
+const {
+    PORT,
+    ENV,
+    SERVICE_ACCOUNT_JSON,
+    SERVICE_ACCOUNT_FILE_PATH
+} = process.env
 
-export default app
+
+// Set Service Account Properties based on ENV
+let serviceAccount
+
+switch (ENV) {
+    case env.VERCEL:
+        serviceAccount = JSON.parse(SERVICE_ACCOUNT_JSON)
+        break;
+    default:
+        serviceAccount = JSON.parse(readFileSync(SERVICE_ACCOUNT_FILE_PATH, "utf8"))
+}
+
+export default {
+    port: PORT ?? 5000,
+    env: ENV ?? "development", // development, production, vercel
+    serviceAccount
+}

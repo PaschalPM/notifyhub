@@ -1,6 +1,6 @@
-import config from "./config/index.js";
-import app from "./config/app.config.js";
+import appConfig from "./config/app.config.js";
+import app from "./app.js";
 
-app.listen(config.port, '0.0.0.0', function () {
-    console.log(`Server running on port ${config.port}`)
+app.listen(appConfig.port, '0.0.0.0', function () {
+    console.log(`Server running on port ${appConfig.port} in ${appConfig.env} environment`)
 })
