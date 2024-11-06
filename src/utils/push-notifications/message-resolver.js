@@ -10,6 +10,9 @@ const GETAWAY_RSVP_SENT = "GETAWAY_RSVP_SENT";
 const EVENT_INVITE_SENT = "EVENT_INVITE_SENT";
 const FRIEND_REQUEST_SENT = "FRIEND_REQUEST_SENT";
 const PREMIUM_CONNECTION_REQUEST_SENT = "PREMIUM_CONNECTION_REQUEST_SENT";
+const DATING_AGENT_BOOKING_REQUEST_SENT = "DATING_AGENT_BOOKING_REQUEST_SENT";
+const DATING_AGENT_BOOKING_REQUEST_ACCEPTED = "DATING_AGENT_BOOKING_REQUEST_ACCEPTED";
+const DATING_AGENT_BOOKING_REQUEST_REJECTED = "DATING_AGENT_BOOKING_REQUEST_REJECTED";
 
 const getMessage = ({ data: { type, senderId, senderName }, recipientTokens }) => {
 
@@ -97,7 +100,23 @@ const messageResolver = (notificationType, senderName, senderId, recipientTokens
         [PREMIUM_CONNECTION_REQUEST_SENT]: messageFunc({
             title: "You've Received a Premium Connection Request!",
             body: `${senderName} has sent you a premium request. Check it out!`
-        })
+        }),
+
+        [DATING_AGENT_BOOKING_REQUEST_SENT]: messageFunc({
+            title: "You've Received a New Booking Request!",
+            body: `${senderName} has requested to book your services. Tap to view details.`
+        }),
+
+        [DATING_AGENT_BOOKING_REQUEST_ACCEPTED]: messageFunc({
+            title: "You've Request to Book an Agent has been Accepted!",
+            body: `${senderName} has accepted to be your dating agent. Tap to view details.`
+        }),
+        
+        [DATING_AGENT_BOOKING_REQUEST_REJECTED]: messageFunc({
+            title: "You've Request to Book an Agent has been Declined!",
+            body: `${senderName} has rejected to be your dating agent. Tap to view details.`
+        }),
+
     }
 
     const selectedMessage = cases[notificationType]

@@ -1,5 +1,5 @@
 import apiResponse from "../../utils/http/api-response.js";
-import { InternalServerError } from "../../utils/http/exceptions.js";
+import { HttpException, InternalServerError } from "../../utils/http/exceptions.js";
 import messageResolver from "../../utils/push-notifications/message-resolver.js";
 import admin from "firebase-admin";
 
@@ -15,7 +15,7 @@ const sendNotification = async (req, res, next) => {
 
     // Validate recipient tokens
     if (!recipientTokens || !recipientTokens.length) {
-        return res.status(400).json({ error: 'An array of recipient tokens is required' });
+        next(new HttpException('An array of recipient tokens is required', 400))
     }
 
     // Convert notification type to uppercase for consistency
@@ -27,8 +27,7 @@ const sendNotification = async (req, res, next) => {
         message = messageResolver(notificationTypeToUpperCase, senderName, senderId, recipientTokens);
 
     } catch (e) {
-        const error = new InternalServerError(e.message)
-        next(error)
+        next(new InternalServerError(e.message))
     }
 
     try {
