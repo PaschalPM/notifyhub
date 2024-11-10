@@ -1,7 +1,7 @@
-import express, { application } from "express";
+import express from "express";
 import initializeHttpServerWithWebSocket from "./config/http-ws.config.js";
 import indexRouter from "./routes/index.js";
-import apiErrorMiddleware from "./middlewares/api-error-handler.middleware.js";
+import apiErrorMiddleware from "./middlewares/http/api-error-handler.middleware.js";
 import "./config/firebase-admin.config.js"
 
 // Set up express server

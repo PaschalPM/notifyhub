@@ -8,7 +8,7 @@ import chatsController from "../../controllers/ws/chats.controller.js";
 
 const chatsEvent = (chatNamespace, socket) => {
     // data = {message, senderId, receiverId}
-    socket.on("sendMessage", (data) => chatsController.sendMessage(chatNamespace, data))
+    socket.on("send_message", (data) => chatsController.sendMessage(chatNamespace, socket, data))
 }
 
 export default chatsEvent
