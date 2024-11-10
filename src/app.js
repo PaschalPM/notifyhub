@@ -1,5 +1,5 @@
-import express from "express";
-
+import express, { application } from "express";
+import initializeHttpServerWithWebSocket from "./config/http-ws.config.js";
 import indexRouter from "./routes/index.js";
 import apiErrorMiddleware from "./middlewares/api-error-handler.middleware.js";
 import "./config/firebase-admin.config.js"
@@ -7,8 +7,10 @@ import "./config/firebase-admin.config.js"
 // Set up express server
 const app = express()
 
+const httpServer = initializeHttpServerWithWebSocket(app)
+
 app.use(express.json())
 app.use(indexRouter)
 app.use(apiErrorMiddleware)
 
-export default app
+export default { application: app, httpServer }

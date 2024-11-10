@@ -1,6 +1,5 @@
 import { Socket } from "socket.io";
 import chatsController from "../../controllers/ws/chats.controller.js";
-
 /**
  * 
  * @param {Socket} chatNamespace 
@@ -8,12 +7,8 @@ import chatsController from "../../controllers/ws/chats.controller.js";
 */
 
 const chatsEvent = (chatNamespace, socket) => {
-
-    // data = {user1Id, user2Id}
-    socket.on("joinChat", (data) => chatsController.joinChat(chatNamespace, socket, data))
-
     // data = {message, senderId, receiverId}
-    socket.on("sendMessage", (data) => chatsController.sendMessage(chatNamespace, socket, data))
+    socket.on("sendMessage", (data) => chatsController.sendMessage(chatNamespace, data))
 }
 
 export default chatsEvent
