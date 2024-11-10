@@ -44,7 +44,7 @@ const sendMessage = async (chatNamespace, socket, data) => {
             if (e instanceof AxiosError) {
                 console.error(e.response.data)
                 // Emit the error message from the API response back to the client
-                socket.emit('error', e.response?.data?.message || "An error occurred.");
+                socket.emit('error', e.response?.data?.message?.toLowerCase() || "An error occurred.");
             }
         }
     }

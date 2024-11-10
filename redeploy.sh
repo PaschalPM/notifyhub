@@ -3,8 +3,5 @@
 # install dependencies
 npm i;
 
-# Stop Node Server
-npm run pm2-stop
-
-# Start Node Server
-npm run pm2-start
+# Restart Node Server
+npm run pm2-restart

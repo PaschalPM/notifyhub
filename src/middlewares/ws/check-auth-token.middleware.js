@@ -13,14 +13,14 @@ const checkAuthToken = (socket, next) => {
 
     // If the access token is not found in the handshake, return an error
     if (!accessToken) {
-        return next(new Error("Access token not found."));
+        return next(new Error("access token not found."));
     }
 
     const decoded = jwt.decode(accessToken);
 
     // If the token could not be decoded (i.e., invalid token), return an error
     if (!decoded) {
-        return next(new Error("Access token is invalid."));
+        return next(new Error("access token is invalid."));
     }
 
     // Check if the decoded token contains the 'exp' (expiration) field
@@ -29,7 +29,7 @@ const checkAuthToken = (socket, next) => {
 
         // Check if token has expired
         if (decoded.exp < currentTime) {
-            return next(new Error('Access token has expired.')); // Reject connection if token expired
+            return next(new Error('access token has expired.')); // Reject connection if token expired
         }
     }
 
