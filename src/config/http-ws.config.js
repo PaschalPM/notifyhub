@@ -14,7 +14,7 @@ const initializeHttpServerWithWebSocket = (app) => {
     const httpServer = http.createServer(app)
     const io = new SocketServer(httpServer, {
         cors: {
-            origin: appConfig.mainApiUrl
+            origin: "*"
         }
     })
 

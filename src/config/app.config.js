@@ -28,6 +28,5 @@ switch (ENV) {
 export default {
     port: PORT ?? 5000,
     env: ENV ?? "development", // development, production, vercel
-    serviceAccount,
-    mainApiUrl: MAIN_API_URL ?? "http://localhost:8000"
+    serviceAccount
 }
