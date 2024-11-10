@@ -13,6 +13,8 @@ const PREMIUM_CONNECTION_REQUEST_SENT = "PREMIUM_CONNECTION_REQUEST_SENT";
 const DATING_AGENT_BOOKING_REQUEST_SENT = "DATING_AGENT_BOOKING_REQUEST_SENT";
 const DATING_AGENT_BOOKING_REQUEST_ACCEPTED = "DATING_AGENT_BOOKING_REQUEST_ACCEPTED";
 const DATING_AGENT_BOOKING_REQUEST_REJECTED = "DATING_AGENT_BOOKING_REQUEST_REJECTED";
+const FRIEND_REQUEST_ACCEPTED = "FRIEND_REQUEST_ACCEPTED"
+
 
 const getMessage = ({ data: { type, senderId, senderName }, recipientTokens }) => {
 
@@ -111,12 +113,16 @@ const messageResolver = (notificationType, senderName, senderId, recipientTokens
             title: "You've Request to Book an Agent has been Accepted!",
             body: `${senderName} has accepted to be your dating agent. Tap to view details.`
         }),
-        
+
         [DATING_AGENT_BOOKING_REQUEST_REJECTED]: messageFunc({
             title: "You've Request to Book an Agent has been Declined!",
             body: `${senderName} has rejected to be your dating agent. Tap to view details.`
         }),
 
+        [FRIEND_REQUEST_ACCEPTED]: messageFunc({
+            title: "Friend Request Accepted!",
+            body: `${senderName} is now your friend. Tap to view details.`
+        })
     }
 
     const selectedMessage = cases[notificationType]
